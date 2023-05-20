@@ -1,1 +1,1 @@
-# Architecture-JEE-Et-Middlewares
+# Architecture JEE Projects
