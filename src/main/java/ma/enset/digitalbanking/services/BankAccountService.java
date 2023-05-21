@@ -4,6 +4,7 @@ import ma.enset.digitalbanking.entities.BankAccount;
 import ma.enset.digitalbanking.entities.CurrentAccount;
 import ma.enset.digitalbanking.entities.Customer;
 import ma.enset.digitalbanking.entities.SavingAccount;
+import ma.enset.digitalbanking.exceptions.BalanceNotSufficientException;
 import ma.enset.digitalbanking.exceptions.BankAccountNotFoundException;
 import ma.enset.digitalbanking.exceptions.CustomerNotFoundException;
 
@@ -15,9 +16,9 @@ public interface BankAccountService {
     CurrentAccount saveCurrentBankAccount(double initBalance, double overDraft, Long custID) throws CustomerNotFoundException;
     List<Customer> listCustomers();
     BankAccount getBankAccount(String accountID) throws BankAccountNotFoundException;
-    void debit( String accountId, double amount, String description) throws BankAccountNotFoundException;
-    void credit( String accountId, double amount, String description);
+    void debit( String accountId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException;
+    void credit( String accountId, double amount, String description) throws BankAccountNotFoundException;
 
-    void transfer( String accountIdSource, double amount, String accountIdDEstination);
+    void transfer( String accountIdSource, double amount, String accountIdDEstination) throws BankAccountNotFoundException, BalanceNotSufficientException;
 
 }
